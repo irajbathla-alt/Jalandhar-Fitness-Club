@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 380px;
+    padding: 40px 30px;
+    background: #0d0d0d;
+    border-radius: 14px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #555;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    border-radius: 30px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.login-btn {
+    background: #fff;
+    color: #000;
+}
+
+.register-btn {
+    background: #2a2a2a;
+    color: #fff;
+}
+
+.register-btn:hover {
+    background: #3a3a3a;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #ff4d4d;
+    min-height: 18px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Member Login</h1>
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <button class="login-btn" onclick="login()">Login</button>
+    <button class="register-btn" onclick="register()">Register</button>
+    <div class="message" id="message"></div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCTQDlsZNhZ-I6CvlNgZDPgpJJYlYto6Rk",
+  authDomain: "jalandhar-fitness-club.firebaseapp.com",
+  projectId: "jalandhar-fitness-club",
+  storageBucket: "jalandhar-fitness-club.firebasestorage.app",
+  messagingSenderId: "899365845803",
+  appId: "1:899365845803:web:a75a331462df8b017f236e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.login = function() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("message");
+
+    signInWithEmailAndPassword(auth, email, password)
+    .then(() => {
+        window.location.href = "dashboard.html";
+    })
+    .catch(error => {
+        message.textContent = error.message;
+    });
+};
+
+window.register = function() {
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const message = document.getElementById("message");
+
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+        window.location.href = "dashboard.html";
+    })
+    .catch(error => {
+        message.textContent = error.message;
+    });
+};
+</script>
+
+</body>
+</html>

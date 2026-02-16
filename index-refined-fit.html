@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jalandhar Fitness Club</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    padding: 40px 20px 60px;
+    text-align: center;
+}
+
+/* Brand */
+.brand h1, .brand h2 {
+    font-family: 'Cinzel', serif;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.brand h1 { font-size: 32px; }
+.brand h2 { font-size: 26px; }
+
+.tagline {
+    margin-top: 12px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Login Button directly under tagline */
+.login-btn {
+    margin-top: 25px;
+    padding: 14px 40px;
+    border-radius: 40px;
+    border: none;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #d9d9d9;
+}
+
+/* Cards */
+.cards {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: #0f0f0f;
+    border: 1px solid #1f1f1f;
+    border-radius: 16px;
+    padding: 30px 25px;
+    width: 320px;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border: 1px solid #fff;
+}
+
+.card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.card p {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .brand h1 { font-size: 26px; }
+    .brand h2 { font-size: 22px; }
+    .cards { flex-direction: column; align-items: center; }
+    .card { width: 100%; max-width: 360px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="brand">
+        <h1>Jalandhar</h1>
+        <h2>Fitness Club</h2>
+        <div class="tagline">More Than Motivation</div>
+
+        <button class="login-btn" onclick="window.location.href='login.html'">
+            Member Login
+        </button>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <h3>4 Week Shred</h3>
+            <p>Structured transformation system focused on fat loss, conditioning, and discipline.</p>
+        </div>
+
+        <div class="card">
+            <h3>Strength Builder</h3>
+            <p>Progressive muscle and power development program designed for long-term strength and growth.</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
