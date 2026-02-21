@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
 
 <style>
-* { box-sizing: border-box; }
-
 body {
     margin: 0;
     background: #000;
@@ -33,7 +31,6 @@ body {
 h1 {
     font-family: 'Cinzel', serif;
     margin-bottom: 30px;
-    letter-spacing: 1px;
 }
 
 input {
@@ -68,9 +65,8 @@ button {
 
 .message {
     margin-top: 15px;
-    font-size: 13px;
-    color: #ff4d4d;
-    min-height: 18px;
+    font-size: 14px;
+    min-height: 20px;
 }
 </style>
 </head>
@@ -102,10 +98,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// Your NEW Apps Script URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPYoPFV6Ez73oq38hebKGFYEEqyOhCd8gBxwlChwJUoGWOc2HiEFurNUX2KXidjz0/exec";
-
-// Must match SECRET in Apps Script
 const SECRET = "JFC2026PRIVATEKEY";
 
 window.login = function() {
@@ -115,7 +108,7 @@ window.login = function() {
 
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-        window.location.href = "dashboard.html";
+        window.location.href = "./dashboard.html";
     })
     .catch(error => {
         message.textContent = error.message;
@@ -130,20 +123,23 @@ window.register = async function() {
     try {
         await createUserWithEmailAndPassword(auth, email, password);
 
-        // CORS-safe request
-        await fetch(SCRIPT_URL, {
+        // Silent sheet update (GitHub safe)
+        fetch(SCRIPT_URL, {
             method: "POST",
             mode: "no-cors",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 email: email,
                 secret: SECRET
             })
         });
 
-        window.location.href = "dashboard.html";
+        message.style.color = "#00ff99";
+        message.textContent = "Registered. Pending Approval...";
+
+        setTimeout(() => {
+            window.location.href = "./dashboard.html";
+        }, 1200);
 
     } catch (error) {
         message.textContent = error.message;
