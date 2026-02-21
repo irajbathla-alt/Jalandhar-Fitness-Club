@@ -108,7 +108,7 @@ window.login = function() {
 
     signInWithEmailAndPassword(auth, email, password)
     .then(() => {
-        window.location.href = "./dashboard.html";
+        window.location.href = "/Jalandhar-Fitness-Club/dashboard.html";
     })
     .catch(error => {
         message.textContent = error.message;
@@ -123,7 +123,6 @@ window.register = async function() {
     try {
         await createUserWithEmailAndPassword(auth, email, password);
 
-        // Silent sheet update (GitHub safe)
         fetch(SCRIPT_URL, {
             method: "POST",
             mode: "no-cors",
@@ -138,7 +137,7 @@ window.register = async function() {
         message.textContent = "Registered. Pending Approval...";
 
         setTimeout(() => {
-            window.location.href = "./dashboard.html";
+            window.location.href = "/Jalandhar-Fitness-Club/dashboard.html";
         }, 1200);
 
     } catch (error) {
