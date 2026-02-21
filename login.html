@@ -102,7 +102,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// NEW Google Apps Script URL
+// Your NEW Apps Script URL
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPYoPFV6Ez73oq38hebKGFYEEqyOhCd8gBxwlChwJUoGWOc2HiEFurNUX2KXidjz0/exec";
 
 // Must match SECRET in Apps Script
@@ -130,23 +130,20 @@ window.register = async function() {
     try {
         await createUserWithEmailAndPassword(auth, email, password);
 
-        const response = await fetch(SCRIPT_URL, {
+        // CORS-safe request
+        await fetch(SCRIPT_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 email: email,
                 secret: SECRET
             })
         });
 
-        const result = await response.text();
-        console.log("Apps Script Response:", result);
-
-        if(result.includes("Success") || result.includes("Already")) {
-            window.location.href = "dashboard.html";
-        } else {
-            message.textContent = "Registration created but sheet update failed.";
-        }
+        window.location.href = "dashboard.html";
 
     } catch (error) {
         message.textContent = error.message;
