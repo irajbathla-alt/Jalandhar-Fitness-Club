@@ -4,73 +4,69 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jalandhar Fitness Club</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap" rel="stylesheet">
-
 <style>
 body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    font-family: Arial, sans-serif;
+    margin:0;
+    background:#000;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+    font-family:Arial, sans-serif;
 }
-
-.container {
-    max-width: 400px;
+.container { max-width:400px; }
+h1,h2 {
+    font-family:'Cinzel',serif;
+    letter-spacing:2px;
+    margin:0;
 }
-
-h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 38px;
-    margin: 0;
-    letter-spacing: 2px;
-}
-
-h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 30px;
-    margin: 0;
-    letter-spacing: 2px;
-}
-
-.tagline {
-    margin-top: 18px;
-    font-size: 15px;
-    opacity: 0.7;
-}
-
+h1 { font-size:38px; }
+h2 { font-size:30px; }
+.tagline { margin-top:18px;font-size:15px;opacity:.7; }
 button {
-    margin-top: 30px;
-    padding: 12px 32px;
-    font-size: 16px;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    background: #fff;
-    color: #000;
-    font-weight: bold;
-    transition: 0.3s ease;
+    margin-top:30px;
+    padding:12px 32px;
+    font-size:16px;
+    border-radius:25px;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s ease;
 }
-
-button:hover {
-    background: #ccc;
+.login-btn { background:#fff;color:#000; }
+.login-btn:hover { background:#ccc; }
+.subscribe-btn {
+    background:linear-gradient(135deg,#00ff88,#00cc66);
+    color:#000;
+    margin-top:18px;
+    box-shadow:0 8px 20px rgba(0,255,120,.3);
 }
+.subscribe-btn:hover { transform:scale(1.05); }
+.small-text { margin-top:14px;font-size:13px;opacity:.6; }
 </style>
 </head>
-
 <body>
-
 <div class="container">
     <h1>Jalandhar</h1>
     <h2>Fitness Club</h2>
     <div class="tagline">More Than Motivation</div>
-    <button onclick="window.location.href='login.html'">Member Login</button>
-</div>
 
+    <button class="login-btn" onclick="window.location.href='login.html'">
+        Member Login
+    </button>
+
+    <a href="https://square.link/u/Yl9jmQEZ" target="_blank" style="text-decoration:none;">
+        <button class="subscribe-btn">
+            Subscribe – $2 / Week
+        </button>
+    </a>
+
+    <div class="small-text">
+        Weekly Auto Billing • Cancel Anytime • Instant Access
+    </div>
+</div>
 </body>
 </html>
