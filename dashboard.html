@@ -95,8 +95,19 @@ onAuthStateChanged(auth, async (user)=>{
 
     if(data.program === "shred"){
         window.location.href="shred.html";
+
     } else if(data.program === "strength"){
         window.location.href="strength.html";
+
+    } else if(data.program === "bikini"){
+        window.location.href="bikini.html";
+
+    } else if(data.program === "p4"){
+        window.location.href="p4.html";
+
+    } else if(data.program === "p5"){
+        window.location.href="p5.html";
+
     } else {
         document.body.innerHTML = "<div class='message'>No Program Assigned</div>";
     }
