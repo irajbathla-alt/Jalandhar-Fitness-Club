@@ -104,6 +104,7 @@ input:focus {
     text-align: center;
     min-height: 18px;
     opacity: 0.9;
+    white-space: pre-line; /* allows \n line breaks */
 }
 </style>
 </head>
@@ -186,11 +187,16 @@ window.register = async function() {
         });
 
         message.style.color = "#00ff99";
-        message.textContent = "Registered. Pending Approval...";
+        message.textContent =
+            "Account Created Successfully.\n\n" +
+            "Please Subscribe First.\n" +
+            "Approval within 24 Hours.\n" +
+            "Please Login Back After Approval.";
 
+        // Give user time to read the message (still redirects like your original)
         setTimeout(() => {
             window.location.href = "/Jalandhar-Fitness-Club/dashboard.html";
-        }, 1200);
+        }, 5000);
 
     } catch (error) {
         message.textContent = error.message;
