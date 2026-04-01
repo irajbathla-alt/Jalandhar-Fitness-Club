@@ -127,6 +127,25 @@ button:disabled {
     object-fit: cover;
 }
 
+.wrapper::after {
+    content: "";
+    display: block;
+    margin-top: 18px;
+    height: 130px;
+    border-radius: 12px;
+    background-image: url('https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.82;
+    border: 1px solid rgba(255,255,255,0.16);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .message {
     margin-top: 15px;
     font-size: 13px;
