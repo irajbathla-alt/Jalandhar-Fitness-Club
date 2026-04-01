@@ -10,40 +10,51 @@
 <style>
 body {
     margin: 0;
-    background: #000;
+    background: radial-gradient(circle at 20% 10%, #152031 0%, #090b10 35%, #050507 100%);
     color: #fff;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 16px;
 }
 
 .wrapper {
     width: 100%;
     max-width: 420px;
-    padding: 60px 40px;
-    background: #111;
+    padding: 40px 30px;
+    background: linear-gradient(150deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
     border-radius: 22px;
-    border: 1px solid #1a1a1a;
+    border: 1px solid rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    animation: enter .6s ease;
+}
+
+
+
+@keyframes enter {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
     font-family: 'Playfair Display', serif;
     font-size: 30px;
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 34px;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
 label {
     font-size: 13px;
-    opacity: 0.6;
+    opacity: 0.7;
     margin-bottom: 6px;
 }
 
@@ -62,25 +73,28 @@ input:focus {
 }
 
 .button-group {
-    margin-top: 30px;
+    margin-top: 26px;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+}
+
+button {
+    transition: 0.2s ease;
 }
 
 .primary-btn {
     padding: 14px;
     border-radius: 12px;
     border: none;
-    background: #e5e5e5;
+    background: linear-gradient(135deg,#ffffff,#c7ffe9);
     color: #000;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.3s ease;
 }
 
 .primary-btn:hover {
-    transform: scale(1.03);
+    transform: translateY(-1px);
 }
 
 .secondary-btn {
@@ -90,7 +104,6 @@ input:focus {
     background: transparent;
     color: #fff;
     cursor: pointer;
-    transition: 0.3s ease;
 }
 
 .secondary-btn:hover {
@@ -98,13 +111,32 @@ input:focus {
     color: #000;
 }
 
+.wrapper::after {
+    content: "";
+    display: block;
+    margin-top: 18px;
+    height: 130px;
+    border-radius: 12px;
+    background-image: url('https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.82;
+    border: 1px solid rgba(255,255,255,0.16);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
 .message {
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 13px;
     text-align: center;
-    min-height: 18px;
-    opacity: 0.9;
-    white-space: pre-line; /* allows \n line breaks */
+    min-height: 20px;
+    opacity: 0.95;
+    white-space: pre-line;
 }
 </style>
 </head>
@@ -116,18 +148,18 @@ input:focus {
     <h1>Member Access</h1>
 
     <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="email" required>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" autocomplete="email" required>
     </div>
 
     <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="password" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" autocomplete="current-password" required>
     </div>
 
     <div class="button-group">
-        <button class="primary-btn" onclick="login()">Sign In</button>
-        <button class="secondary-btn" onclick="register()">Create Account</button>
+        <button id="signInBtn" class="primary-btn" onclick="login()">Sign In</button>
+        <button id="createBtn" class="secondary-btn" onclick="register()">Create Account</button>
     </div>
 
     <div class="message" id="message"></div>
@@ -154,52 +186,84 @@ const auth = getAuth(app);
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzPYoPFV6Ez73oq38hebKGFYEEqyOhCd8gBxwlChwJUoGWOc2HiEFurNUX2KXidjz0/exec";
 const SECRET = "JFC2026PRIVATEKEY";
 
-window.login = function() {
+function setBusy(isBusy) {
+    document.getElementById("signInBtn").disabled = isBusy;
+    document.getElementById("createBtn").disabled = isBusy;
+}
+
+function setMessage(text, color = "#ffffff") {
+    const message = document.getElementById("message");
+    message.style.color = color;
+    message.textContent = text;
+}
+
+function getCredentials() {
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    const message = document.getElementById("message");
 
-    signInWithEmailAndPassword(auth, email, password)
-    .then(() => {
-        window.location.href = "/Jalandhar-Fitness-Club/dashboard.html";
-    })
-    .catch(error => {
-        message.textContent = error.message;
-    });
+    if (!email || !password) {
+        setMessage("Please enter both email and password.", "#ff8080");
+        return null;
+    }
+
+    return { email, password };
+}
+
+window.login = async function() {
+    const credentials = getCredentials();
+    if (!credentials) {
+        return;
+    }
+
+    setBusy(true);
+    setMessage("Signing in...");
+
+    try {
+        await signInWithEmailAndPassword(auth, credentials.email, credentials.password);
+        window.location.href = "dashboard.html";
+    } catch (error) {
+        setMessage(error.message, "#ff8080");
+    } finally {
+        setBusy(false);
+    }
 };
 
 window.register = async function() {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const message = document.getElementById("message");
+    const credentials = getCredentials();
+    if (!credentials) {
+        return;
+    }
+
+    setBusy(true);
+    setMessage("Creating account...");
 
     try {
-        await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, credentials.email, credentials.password);
 
         fetch(SCRIPT_URL, {
             method: "POST",
             mode: "no-cors",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                email: email,
+                email: credentials.email,
                 secret: SECRET
             })
         });
 
-        message.style.color = "#00ff99";
-        message.textContent =
-            "Account Created Successfully.\n\n" +
-            "Please Subscribe First.\n" +
-            "Approval within 24 Hours.\n" +
-            "Please Login Back After Approval.";
+        setMessage(
+            "Account created successfully.\n\n" +
+            "Please subscribe first.\n" +
+            "Approval within 24 hours.\n" +
+            "You will be redirected shortly.",
+            "#00ff99"
+        );
 
-        // Give user time to read the message (still redirects like your original)
         setTimeout(() => {
-            window.location.href = "/Jalandhar-Fitness-Club/dashboard.html";
+            window.location.href = "dashboard.html";
         }, 5000);
-
     } catch (error) {
-        message.textContent = error.message;
+        setMessage(error.message, "#ff8080");
+        setBusy(false);
     }
 };
 </script>
