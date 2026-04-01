@@ -6,13 +6,6 @@
 <title>Jalandhar Fitness Club</title>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-    --bg: #050507;
-    --card: rgba(255, 255, 255, 0.08);
-    --accent: #00ffa3;
-    --accent-2: #5bf7ff;
-}
-
 * { box-sizing: border-box; }
 
 body {
@@ -20,66 +13,29 @@ body {
     min-height: 100vh;
     font-family: 'Inter', Arial, sans-serif;
     color: #fff;
-    background: radial-gradient(circle at 15% 20%, #17202d 0%, #090b10 40%, #050507 100%);
+    background: radial-gradient(circle at top, #1a2538 0%, #0b1019 45%, #05070c 100%);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px;
-    overflow-x: hidden;
-}
-
-body::before,
-body::after {
-    content: "";
-    position: fixed;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    filter: blur(70px);
-    z-index: -1;
-    animation: glowMove 9s ease-in-out infinite alternate;
-}
-
-body::before {
-    background: rgba(91, 247, 255, 0.22);
-    top: -120px;
-    right: -80px;
-}
-
-body::after {
-    background: rgba(0, 255, 163, 0.18);
-    bottom: -180px;
-    left: -120px;
-    animation-delay: 1.8s;
-}
-
-@keyframes glowMove {
-    from { transform: translateY(0) translateX(0); }
-    to { transform: translateY(20px) translateX(-20px); }
+    text-align: center;
+    padding: 20px;
 }
 
 .container {
     width: 100%;
-    max-width: 980px;
-    background: linear-gradient(150deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 26px;
-    padding: 32px;
-    backdrop-filter: blur(14px);
-    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
-    animation: fadeUp .9s ease;
+    max-width: 760px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 24px;
+    padding: 34px 24px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    animation: rise .7s ease;
 }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(15px); }
+@keyframes rise {
+    from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-.top {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 28px;
-    align-items: center;
 }
 
 h1, h2 {
@@ -88,14 +44,36 @@ h1, h2 {
     letter-spacing: 2px;
 }
 
-h1 { font-size: clamp(2rem, 6vw, 3.2rem); }
-h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); opacity: 0.9; }
+h1 { font-size: clamp(2rem, 8vw, 3rem); }
+h2 { font-size: clamp(1.4rem, 6vw, 2rem); opacity: 0.9; }
 
-.tagline { margin-top: 14px; opacity: .8; font-size: 1rem; }
+.tagline {
+    margin-top: 14px;
+    opacity: .85;
+    font-weight: 600;
+}
+
+.badges {
+    margin: 18px auto 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge {
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    letter-spacing: .4px;
+    background: rgba(255,255,255,.06);
+}
 
 .cta-row {
-    margin-top: 28px;
+    margin-top: 24px;
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 12px;
 }
@@ -103,110 +81,68 @@ h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); opacity: 0.9; }
 button {
     padding: 12px 26px;
     border-radius: 999px;
-    border: 1px solid transparent;
+    border: none;
     cursor: pointer;
     font-weight: 700;
     transition: .25s ease;
 }
 
-.login-btn {
-    background: #fff;
-    color: #000;
-}
-
-.login-btn:hover { transform: translateY(-2px) scale(1.02); }
+.login-btn { background: #fff; color: #000; }
+.login-btn:hover { transform: translateY(-2px); }
 
 .subscribe-btn {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    color: #00130d;
-    box-shadow: 0 14px 35px rgba(0,255,163,.3);
-    animation: pulse 2s infinite;
+    background: linear-gradient(135deg, #00ffa3, #66f0ff);
+    color: #00150f;
+    box-shadow: 0 12px 30px rgba(0,255,163,.32);
+    animation: pulse 2.1s infinite;
 }
 
 @keyframes pulse {
-    0%, 100% { box-shadow: 0 14px 35px rgba(0,255,163,.25); }
-    50% { box-shadow: 0 18px 45px rgba(0,255,163,.45); }
+    50% { box-shadow: 0 18px 42px rgba(0,255,163,.45); }
 }
 
-.subscribe-btn:hover { transform: translateY(-2px) scale(1.03); }
-
-.small-text { margin-top: 14px; font-size: 13px; opacity: .7; }
-
-.preview-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 12px;
-}
-
-.preview-card {
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 14px;
+.workout-gif {
+    margin-top: 22px;
+    border-radius: 16px;
     overflow: hidden;
-    background: rgba(255,255,255,.05);
-    transform: translateY(0);
-    transition: .3s ease;
+    border: 1px solid rgba(255,255,255,.2);
 }
 
-.preview-card:hover { transform: translateY(-4px); }
-
-.preview-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
+.workout-gif img {
     display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 }
 
-.preview-card .label {
-    font-size: 12px;
-    letter-spacing: .8px;
-    opacity: .8;
-    padding: 8px;
-    text-align: center;
-}
-
-@media (max-width: 760px) {
-    .top { grid-template-columns: 1fr; }
-    .container { padding: 24px; }
-}
+.small-text { margin-top: 14px; font-size: 13px; opacity: .75; }
 </style>
 </head>
 <body>
 <div class="container">
-    <div class="top">
-        <div>
-            <h1>Jalandhar</h1>
-            <h2>Fitness Club</h2>
-            <div class="tagline">More Than Motivation • Premium Coaching Energy</div>
+    <h1>Jalandhar</h1>
+    <h2>Fitness Club</h2>
+    <div class="tagline">Gym Programs • Strength • Fat Loss • Premium Coaching</div>
 
-            <div class="cta-row">
-                <button class="login-btn" onclick="window.location.href='login.html'">Member Login</button>
-                <a href="https://square.link/u/E4LYxGUQ" target="_blank" style="text-decoration:none;">
-                    <button class="subscribe-btn">Subscribe – $2 / Week</button>
-                </a>
-            </div>
-
-            <div class="small-text">Weekly Auto Billing • Cancel Anytime • Instant Access</div>
-        </div>
-
-        <div class="preview-grid">
-            <div class="preview-card">
-                <img src="https://media.giphy.com/media/l3vR85PnGsBwu1PFK/giphy.gif" alt="Strength training gif">
-                <div class="label">STRENGTH</div>
-            </div>
-            <div class="preview-card">
-                <img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" alt="Cardio workout gif">
-                <div class="label">SHRED</div>
-            </div>
-            <div class="preview-card">
-                <img src="https://media.giphy.com/media/xT9IgG50Fb7Mi0prBC/giphy.gif" alt="Fitness motivation gif">
-                <div class="label">MOBILITY</div>
-            </div>
-            <div class="preview-card">
-                <img src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif" alt="Coach energy gif">
-                <div class="label">PREMIUM COACHING</div>
-            </div>
-        </div>
+    <div class="badges">
+        <div class="badge">Strength Training</div>
+        <div class="badge">Muscle Building</div>
+        <div class="badge">Shred Plans</div>
+        <div class="badge">Coach Support</div>
     </div>
+
+    <div class="cta-row">
+        <button class="login-btn" onclick="window.location.href='login.html'">Member Login</button>
+        <a href="https://square.link/u/E4LYxGUQ" target="_blank" style="text-decoration:none;">
+            <button class="subscribe-btn">Join Gym Access – $2 / Week</button>
+        </a>
+    </div>
+
+    <div class="workout-gif">
+        <img src="https://media.giphy.com/media/l3vR85PnGsBwu1PFK/giphy.gif" alt="Gym workout training animation">
+    </div>
+
+    <div class="small-text">Weekly Auto Billing • Cancel Anytime • Instant Access</div>
 </div>
 </body>
 </html>

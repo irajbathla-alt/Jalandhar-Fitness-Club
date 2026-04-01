@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Member Dashboard</title>
 <style>
+* { box-sizing: border-box; }
+
 body {
     margin: 0;
-    background: radial-gradient(circle at 80% 10%, #132134 0%, #090b10 35%, #050507 100%);
+    background: radial-gradient(circle at top, #1c2a40 0%, #0b1019 45%, #05070c 100%);
     color: #fff;
     font-family: Arial, sans-serif;
     display: flex;
@@ -15,43 +17,48 @@ body {
     align-items: center;
     min-height: 100vh;
     text-align: center;
-    padding: 24px;
+    padding: 20px;
 }
 
 .panel {
-    max-width: 440px;
+    max-width: 470px;
     width: 100%;
-    padding: 28px;
-    border: 1px solid #222;
-    border-radius: 16px;
-    background: linear-gradient(150deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+    padding: 26px;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
     backdrop-filter: blur(10px);
-    box-shadow: 0 25px 60px rgba(0,0,0,.42);
+    box-shadow: 0 24px 60px rgba(0,0,0,.45);
     animation: reveal .6s ease;
 }
 
+.title {
+    margin: 0 0 8px;
+    letter-spacing: .8px;
+}
+
 .message {
-    font-size: 20px;
-    line-height: 1.4;
+    font-size: 21px;
+    line-height: 1.35;
 }
 
 .subtext {
-    margin-top: 12px;
+    margin-top: 10px;
     font-size: 14px;
-    opacity: 0.75;
+    opacity: 0.8;
 }
 
 .status-gif {
     margin-top: 16px;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.18);
 }
 
 .status-gif img {
     display: block;
     width: 100%;
-    height: 140px;
+    height: 145px;
     object-fit: cover;
 }
 
@@ -62,12 +69,12 @@ body {
 </style>
 </head>
 <body>
-
 <div class="panel">
+    <h3 class="title">Gym Membership Status</h3>
     <div class="message" id="message">Checking Membership...</div>
-    <div class="subtext" id="subtext">Please wait while we verify your account.</div>
+    <div class="subtext" id="subtext">Please wait while we verify your workout access.</div>
     <div class="status-gif">
-        <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Premium training motivation">
+        <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Gym motivation animation">
     </div>
 </div>
 
@@ -178,25 +185,25 @@ onAuthStateChanged(auth, async (user) => {
         const data = await getMemberData(user.email || "");
 
         if (!data) {
-            setStatus("Pending Approval", "Your account exists, but your membership has not been activated yet.");
+            setStatus("Pending Approval", "Your gym membership is being activated.");
             return;
         }
 
         if (data.status !== "active") {
-            setStatus("Subscription Required — $2/Week", "Please subscribe, then login again after approval.");
+            setStatus("Subscription Required — $2/Week", "Subscribe to unlock your workout plan.");
             return;
         }
 
         const expiryDate = new Date(data.expiry);
         if (Number.isNaN(expiryDate.getTime())) {
-            setStatus("Membership Date Error", "Please contact support to update your expiry date.");
+            setStatus("Membership Date Error", "Please contact support to fix expiry date.");
             return;
         }
 
         expiryDate.setHours(23, 59, 59, 999);
 
         if (new Date() > expiryDate) {
-            setStatus("Membership Expired", "Please renew your membership to continue.");
+            setStatus("Membership Expired", "Renew your gym membership to continue training.");
             return;
         }
 
@@ -206,13 +213,12 @@ onAuthStateChanged(auth, async (user) => {
             return;
         }
 
-        setStatus("Program Not Assigned", "Please contact support to assign your training program.");
+        setStatus("Program Not Assigned", "Ask support to assign your gym program.");
     } catch (error) {
-        setStatus("Unable to Verify Membership", "Please check your connection and try again in a moment.");
+        setStatus("Unable to Verify Membership", "Please check your internet and try again.");
         console.error(error);
     }
 });
 </script>
-
 </body>
 </html>
