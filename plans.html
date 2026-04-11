@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Your Plan | Jalandhar Fitness Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-start: #1a2538;
+    --bg-mid: #0b1019;
+    --bg-end: #05070c;
+    --mint: #00ffa3;
+    --cyan: #66f0ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    background: radial-gradient(circle at top, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+    padding: 26px 18px 34px;
+}
+
+.page {
+    width: 100%;
+    max-width: 1020px;
+    margin: 0 auto;
+    animation: fadeUp .7s ease both;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+h1 {
+    margin: 0;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 1.5px;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+}
+
+.subtitle {
+    margin: 12px 0 0;
+    opacity: .82;
+    font-size: clamp(.95rem, 3vw, 1.08rem);
+}
+
+.plan-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 14px;
+}
+
+.plan-card {
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 18px;
+    padding: 18px;
+    background: linear-gradient(150deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.4);
+    transform: translateY(14px);
+    opacity: 0;
+    animation: cardIn .6s ease forwards;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.plan-card:nth-child(2) { animation-delay: .12s; }
+.plan-card:nth-child(3) { animation-delay: .22s; }
+
+.plan-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 22px 44px rgba(0,0,0,.5);
+    border-color: rgba(102,240,255,.4);
+}
+
+.plan-tag {
+    display: inline-block;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.25);
+    padding: 5px 10px;
+    font-size: 12px;
+    letter-spacing: .3px;
+    margin-bottom: 10px;
+}
+
+.plan-name {
+    margin: 0;
+    font-size: 24px;
+}
+
+.plan-price {
+    margin: 10px 0 8px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.plan-price span {
+    opacity: .7;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.plan-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px;
+    opacity: .9;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.plan-features li::before {
+    content: "✓";
+    color: var(--mint);
+    margin-right: 8px;
+}
+
+.plan-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-decoration: none;
+    border-radius: 999px;
+    padding: 11px 16px;
+    font-weight: 700;
+    border: 0;
+    cursor: pointer;
+    transition: transform .24s ease, filter .24s ease;
+}
+
+.plan-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.btn-basic {
+    color: #09131f;
+    background: linear-gradient(135deg, #dbf4ff, #a7ddff);
+}
+
+.btn-pro {
+    color: #092014;
+    background: linear-gradient(135deg, var(--mint), var(--cyan));
+    box-shadow: 0 12px 26px rgba(0,255,163,.27);
+}
+
+.btn-elite {
+    color: #221700;
+    background: linear-gradient(135deg, #ffd77a, #ffb347);
+}
+
+.bottom-nav {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.back-link {
+    color: rgba(255,255,255,.78);
+    text-decoration: none;
+    transition: color .2s ease;
+}
+
+.back-link:hover { color: #fff; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+body.page-leaving {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+</style>
+</head>
+<body>
+<main class="page">
+    <header class="header">
+        <h1>Select Your Plan</h1>
+        <p class="subtitle">Choose the fitness plan that matches your goal. Smooth access, faster progress.</p>
+    </header>
+
+    <section class="plan-grid">
+        <article class="plan-card">
+            <div class="plan-tag">Starter</div>
+            <h2 class="plan-name">Basic Access</h2>
+            <div class="plan-price">$2 <span>/ week</span></div>
+            <ul class="plan-features">
+                <li>Gym floor access</li>
+                <li>Standard workout split</li>
+                <li>Auto-renew weekly</li>
+            </ul>
+            <a class="plan-btn btn-basic" href="https://square.link/u/E4LYxGUQ" target="_blank" rel="noopener">Choose Basic</a>
+        </article>
+
+        <article class="plan-card">
+            <div class="plan-tag">Most Popular</div>
+            <h2 class="plan-name">Pro Program</h2>
+            <div class="plan-price">$5 <span>/ week</span></div>
+            <ul class="plan-features">
+                <li>Everything in Basic</li>
+                <li>Goal-based plan selection</li>
+                <li>Priority support</li>
+            </ul>
+            <a class="plan-btn btn-pro" href="https://square.link/u/E4LYxGUQ" target="_blank" rel="noopener">Choose Pro</a>
+        </article>
+
+        <article class="plan-card">
+            <div class="plan-tag">Advanced</div>
+            <h2 class="plan-name">Elite Coaching</h2>
+            <div class="plan-price">$9 <span>/ week</span></div>
+            <ul class="plan-features">
+                <li>Everything in Pro</li>
+                <li>Advanced strength & shred cycles</li>
+                <li>Dedicated coach check-ins</li>
+            </ul>
+            <a class="plan-btn btn-elite" href="https://square.link/u/E4LYxGUQ" target="_blank" rel="noopener">Choose Elite</a>
+        </article>
+    </section>
+
+    <div class="bottom-nav">
+        <a class="back-link" href="index.html">← Back to Home</a>
+    </div>
+</main>
+<script>
+document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        event.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(() => {
+            window.location.href = href;
+        }, 260);
+    });
+});
+</script>
+
+</body>
+</html>
