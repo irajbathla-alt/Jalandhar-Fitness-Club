@@ -96,7 +96,7 @@ body {
     <div class="status-gif">
         <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Gym motivation animation">
     </div>
-    <a class="action-btn" id="actionBtn" href="plans.html" style="display:none;">View Plans</a>
+    <a class="action-btn" id="actionBtn" href="plans.html" style="display:none;">View Programs</a>
 </div>
 
 <script type="module">
@@ -212,7 +212,7 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         if (data.status !== "active") {
-            setStatus("Subscription Required", "Choose a plan to unlock your workout program.", true);
+            setStatus("Subscription Required", "Choose your program to unlock workouts.", true);
             return;
         }
 
@@ -225,7 +225,7 @@ onAuthStateChanged(auth, async (user) => {
         expiryDate.setHours(23, 59, 59, 999);
 
         if (new Date() > expiryDate) {
-            setStatus("Membership Expired", "Renew your gym membership to continue training.", true);
+            setStatus("Membership Expired", "Renew and select your program to continue training.", true);
             return;
         }
 
