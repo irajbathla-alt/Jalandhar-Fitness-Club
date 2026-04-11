@@ -48,6 +48,26 @@ body {
     opacity: 0.8;
 }
 
+.action-btn {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 999px;
+    color: #07161f;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ffa3, #66f0ff);
+    box-shadow: 0 12px 26px rgba(0,255,163,.24);
+    transition: transform .2s ease, filter .2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
 .status-gif {
     margin-top: 16px;
     border-radius: 12px;
@@ -76,6 +96,7 @@ body {
     <div class="status-gif">
         <img src="https://media.giphy.com/media/111ebonMs90YLu/giphy.gif" alt="Gym motivation animation">
     </div>
+    <a class="action-btn" id="actionBtn" href="plans.html" style="display:none;">View Programs</a>
 </div>
 
 <script type="module">
@@ -95,9 +116,10 @@ initializeApp(firebaseConfig);
 const auth = getAuth();
 const CSV_URL = "https://docs.google.com/spreadsheets/d/1lXYKjtW2BzFEuIouRl04O8AT8zyiUaz3QwBHxsDwFqk/export?format=csv";
 
-function setStatus(message, subtext = "") {
+function setStatus(message, subtext = "", showPlans = false) {
     document.getElementById("message").textContent = message;
     document.getElementById("subtext").textContent = subtext;
+    document.getElementById("actionBtn").style.display = showPlans ? "inline-flex" : "none";
 }
 
 function parseCsvLine(line) {
@@ -190,7 +212,7 @@ onAuthStateChanged(auth, async (user) => {
         }
 
         if (data.status !== "active") {
-            setStatus("Subscription Required — $2/Week", "Subscribe to unlock your workout plan.");
+            setStatus("Subscription Required", "Choose your program to unlock workouts.", true);
             return;
         }
 
@@ -203,7 +225,7 @@ onAuthStateChanged(auth, async (user) => {
         expiryDate.setHours(23, 59, 59, 999);
 
         if (new Date() > expiryDate) {
-            setStatus("Membership Expired", "Renew your gym membership to continue training.");
+            setStatus("Membership Expired", "Renew and select your program to continue training.", true);
             return;
         }
 

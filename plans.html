@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Select Your Program | Jalandhar Fitness Club</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-start: #1a2538;
+    --bg-mid: #0b1019;
+    --bg-end: #05070c;
+    --mint: #00ffa3;
+    --cyan: #66f0ff;
+}
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Inter', Arial, sans-serif;
+    background: radial-gradient(circle at top, var(--bg-start) 0%, var(--bg-mid) 45%, var(--bg-end) 100%);
+    padding: 26px 18px 34px;
+}
+.page { width: 100%; max-width: 1020px; margin: 0 auto; animation: fadeUp .7s ease both; }
+.header { text-align: center; margin-bottom: 22px; }
+h1 { margin: 0; font-family: 'Cinzel', serif; letter-spacing: 1.5px; font-size: clamp(2rem, 7vw, 2.8rem); }
+.subtitle { margin: 12px 0 0; opacity: .82; font-size: clamp(.95rem, 3vw, 1.08rem); }
+.plan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.plan-card {
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 18px;
+    padding: 18px;
+    background: linear-gradient(150deg, rgba(255,255,255,.1), rgba(255,255,255,.04));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 16px 40px rgba(0,0,0,.4);
+    transform: translateY(14px);
+    opacity: 0;
+    animation: cardIn .6s ease forwards;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.plan-card:nth-child(2) { animation-delay: .12s; }
+.plan-card:nth-child(3) { animation-delay: .22s; }
+.plan-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 22px 44px rgba(0,0,0,.5); border-color: rgba(102,240,255,.4); }
+.plan-tag { display: inline-block; border-radius: 999px; border: 1px solid rgba(255,255,255,.25); padding: 5px 10px; font-size: 12px; letter-spacing: .3px; margin-bottom: 10px; }
+.plan-name { margin: 0; font-size: 26px; }
+.plan-goal { margin: 10px 0 8px; font-size: 16px; color: #b7d7f2; }
+.plan-features { list-style: none; padding: 0; margin: 0 0 15px; opacity: .9; font-size: 14px; line-height: 1.55; }
+.plan-features li::before { content: "✓"; color: var(--mint); margin-right: 8px; }
+.plan-btn { display: inline-flex; justify-content: center; align-items: center; width: 100%; text-decoration: none; border-radius: 999px; padding: 11px 16px; font-weight: 700; border: 0; cursor: pointer; transition: transform .24s ease, filter .24s ease; }
+.plan-btn:hover { transform: translateY(-2px); filter: brightness(1.08); }
+.btn-strength { color: #09131f; background: linear-gradient(135deg, #dbf4ff, #a7ddff); }
+.btn-shred { color: #092014; background: linear-gradient(135deg, var(--mint), var(--cyan)); box-shadow: 0 12px 26px rgba(0,255,163,.27); }
+.btn-bikini { color: #2e0f26; background: linear-gradient(135deg, #ffd3eb, #ff9ece); }
+.bottom-nav { margin-top: 18px; text-align: center; }
+.back-link { color: rgba(255,255,255,.78); text-decoration: none; transition: color .2s ease; }
+.back-link:hover { color: #fff; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
+body.page-leaving { opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s ease; }
+</style>
+</head>
+<body>
+<main class="page">
+    <header class="header">
+        <h1>Select Your Program</h1>
+        <p class="subtitle">Choose between Strength, Shred, and Bikini with smooth animated transitions.</p>
+    </header>
+
+    <section class="plan-grid">
+        <article class="plan-card">
+            <div class="plan-tag">Power Focus</div>
+            <h2 class="plan-name">Strength</h2>
+            <div class="plan-goal">Build size, power, and performance.</div>
+            <ul class="plan-features">
+                <li>Progressive overload based split</li>
+                <li>Strength-focused weekly structure</li>
+                <li>Best for muscle and power goals</li>
+            </ul>
+            <a class="plan-btn btn-strength" href="strength.html">Open Strength Plan</a>
+        </article>
+
+        <article class="plan-card">
+            <div class="plan-tag">Fat Loss Focus</div>
+            <h2 class="plan-name">Shred</h2>
+            <div class="plan-goal">Burn fat while protecting lean muscle.</div>
+            <ul class="plan-features">
+                <li>Conditioning + resistance balance</li>
+                <li>Higher activity and calorie burn</li>
+                <li>Best for cutting and definition</li>
+            </ul>
+            <a class="plan-btn btn-shred" href="shred.html">Open Shred Plan</a>
+        </article>
+
+        <article class="plan-card">
+            <div class="plan-tag">Shape Focus</div>
+            <h2 class="plan-name">Bikini</h2>
+            <div class="plan-goal">Sculpt glutes, core, and full-body tone.</div>
+            <ul class="plan-features">
+                <li>Lower-body and core emphasis</li>
+                <li>Conditioning for a lean look</li>
+                <li>Best for bikini prep goals</li>
+            </ul>
+            <a class="plan-btn btn-bikini" href="bikini.html">Open Bikini Plan</a>
+        </article>
+    </section>
+
+    <div class="bottom-nav">
+        <a class="back-link" href="index.html">← Back to Home</a>
+    </div>
+</main>
+<script>
+document.querySelectorAll('a[href$=".html"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        event.preventDefault();
+        document.body.classList.add('page-leaving');
+        setTimeout(() => {
+            window.location.href = href;
+        }, 260);
+    });
+});
+</script>
+</body>
+</html>
